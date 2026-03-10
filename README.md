@@ -1,32 +1,32 @@
-<h1 align="center">audio-deepfake-guard</h1>
+<h1 align="center">voice-deepfake-detector-gui</h1>
 
 <p align="center">
-  <strong>Desktop tool to detect audio deepfakes / synthetic speech</strong><br>
-  <em>48 forensic audio features + XGBoost/LightGBM ensemble → segment-level probability + visual report</em>
+  <strong>Desktop forensic tool to hunt synthetic voices</strong><br>
+  <em>48 hand-crafted forensic features → XGBoost + LightGBM ensemble → segment-level deepfake scoring + PDF forensic report</em>
 </p>
 
 <p align="center">
-  Lightweight • Interpretable • No heavy deep learning models
+  <strong>NO DEEP LEARNING. NO BULLSHIT. JUST HARD EVIDENCE.</strong><br>
+  Lightweight • interpretable • pinpoints suspicious parts • runs on almost anything
 </p>
 
 <br>
 
 ## What it does
 
-A PyQt5-based GUI application that analyzes audio files for signs of synthetic manipulation (deepfakes, voice cloning, TTS generation).
+A clean PyQt5 GUI that tears audio files apart and tells you exactly which parts smell like synthetic speech (TTS, voice cloning, deepfake audio).
 
-**Key features**
+**Core features**
 
-- Splits audio into short segments (~10 ms)
-- Extracts **48 hand-crafted forensic features** (MFCC, spectral, pitch, formant, jitter/shimmer, band energy ratios, entropy, etc.)
-- Classifies each segment with an **ensemble** of XGBoost + LightGBM
-- Visualizes probabilities over time (line plot + heatmap)
-- Highlights **top 5 most suspicious segments**
-- Shows feature distributions + model consistency
-- Exports full forensic report as **PDF** (with embedded plots)
-- Supports CPU / CUDA / OpenCL (if available)
+- Splits audio into ~10 ms segments  
+- Extracts **48 forensic audio features** (MFCCs, jitter/shimmer, formants, band energy ratios, spectral entropy, modulation index, HNR, crest factor, …)  
+- Classifies every segment using an **XGBoost + LightGBM ensemble** (averaged probabilities)  
+- Visualizes: probability timeline, heatmap (RdYlGn_r), top-5 most suspicious segments, feature distributions, model agreement  
+- Exports a **complete PDF forensic report** with embedded plots (ready for court, journalism, security, call-center audits)  
+- Supports CPU / CUDA / OpenCL acceleration for feature extraction where available  
+- Built-in **training tab**: load your SQLite database → extract features → train new models → save .pkl files → use instantly  
 
-Built for scenarios where interpretability, low resource usage and clear reporting matter more than bleeding-edge EER.
+No 2 GB models. No internet dependency. No black-box nonsense. Just features + boosting.
 
 ## Quick start
 
@@ -34,10 +34,10 @@ Built for scenarios where interpretability, low resource usage and clear reporti
 # 1. Install dependencies
 pip install -r requirements.txt
 
-# 2. Place your trained models
+# 2. Provide pre-trained models (or train your own)
 #    → xgb_model.pkl
 #    → lgb_model.pkl
-#    (in the same folder as main.py)
+#    (place them next to main.py)
 
-# 3. Run
+# 3. Launch
 python main.py
